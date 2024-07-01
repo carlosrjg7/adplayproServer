@@ -1,0 +1,146 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int            @id @default(autoincrement())
+  name         String
+  lastname     String
+  email        String         @unique
+  password     String
+  status       Boolean
+  role         Rol            @default(USER)
+  token        String
+  confirmed    Boolean        @default(false)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  Screen       Screen[]
+  Resource     Resource[]
+  Playlist     Playlist[]
+  Subscription Subscription[]
+  Payment      Payment[]
+}
+
+model Screen {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [idUser], references: [id])
+  idUser    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  status    Boolean
+}
+
+model Resource {
+  id             Int              @id @default(autoincrement())
+  user           User             @relation(fields: [idUser], references: [id])
+  idUser         Int
+  name           String
+  size           Int
+  type           String
+  url            String
+  ruta           String
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  PlaylistDetail PlaylistDetail[]
+  Calendar       Calendar[]
+}
+
+model Playlist {
+  id             Int              @id @default(autoincrement())
+  user           User             @relation(fields: [idUser], references: [id])
+  idUser         Int
+  name           String
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  status         Boolean
+  PlaylistDetail PlaylistDetail[]
+  Calendar       Calendar[]
+}
+
+model PlaylistDetail {
+  id         Int      @id @default(autoincrement())
+  playlist   Playlist @relation(fields: [idPlaylist], references: [id])
+  idPlaylist Int
+  resource   Resource @relation(fields: [idResource], references: [id])
+  idResource Int
+  time       Int
+  orden      Int
+  status     Boolean
+}
+
+model Calendar {
+  id         Int      @id @default(autoincrement())
+  resource   Resource @relation(fields: [idResource], references: [id])
+  idResource Int
+  playlist   Playlist @relation(fields: [idPlaylist], references: [id])
+  idPlaylist Int
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  start      DateTime
+  end        DateTime
+  repeat     Repeat   @default(DIA)
+  status     Boolean
+}
+
+model Plan {
+  id           Int            @id @default(autoincrement())
+  amount       Float
+  name         String
+  details      String
+  status       Boolean
+  screens      Int
+  Subscription Subscription[]
+  Payment      Payment[]
+}
+
+model Subscription {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [idUser], references: [id])
+  idUser    Int
+  plan      Plan     @relation(fields: [idPlan], references: [id])
+  idPlan    Int
+  startDate DateTime @default(now())
+  endDate   DateTime
+  status    Boolean
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Payment {
+  id          Int      @id @default(autoincrement())
+  user        User     @relation(fields: [idUser], references: [id])
+  idUser      Int
+  plan        Plan     @relation(fields: [idPlan], references: [id])
+  idPlan      Int
+  amount      Float
+  startDate   DateTime
+  endDate     DateTime
+  paymentDate DateTime @default(now())
+  status      Boolean
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum Rol {
+  USER
+  ADMIN
+  READ
+}
+
+enum Repeat {
+  DIA
+  SEMANA
+  MES
+  HABILES
+}

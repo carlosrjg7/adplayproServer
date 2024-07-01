@@ -1,0 +1,48 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://marketplace.visualstudio.com/items?itemName=pomdtr.excalidraw-editor",
+  "elements": [
+    {
+      "id": "gGXLpUSacTuACeOaUXlsh",
+      "type": "text",
+      "x": 274.20001220703125,
+      "y": 724.8000030517578,
+      "width": 170.75982666015625,
+      "height": 275,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "roundness": null,
+      "seed": 131739606,
+      "version": 99,
+      "versionNonce": 673238538,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1716763922125,
+      "link": null,
+      "locked": false,
+      "text": "Usuarios\npantallas\nArchivos/recursos\nplaylist\ncalendario\n\nusuarios\nplanes\nreportes\nroles\n",
+      "fontSize": 20,
+      "fontFamily": 1,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "baseline": 268,
+      "containerId": null,
+      "originalText": "Usuarios\npantallas\nArchivos/recursos\nplaylist\ncalendario\n\nusuarios\nplanes\nreportes\nroles\n",
+      "lineHeight": 1.25
+    }
+  ],
+  "appState": {
+    "gridSize": null,
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}
