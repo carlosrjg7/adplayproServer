@@ -14,25 +14,23 @@ const app = express();
 
 app.use(express.json());
 
-/* const whitelist = [
+const whitelist = [
   process.env.FRONTEND_URL,
   "http://localhost:3000/",
-  "http://localhost:3001"
+  "http://localhost:3001",
 ];
 
 const corsOptions = {
-  origin: function(origin, callback) {
-    if(whitelist.includes(origin)){
+  origin: function (origin, callback) {
+    if (whitelist.includes(origin)) {
       callback(null, true);
-    }else{
+    } else {
       callback(new Error("Error de cors"));
     }
-  }
-}
+  },
+};
 
-app.use(cors(corsOptions)); */
-
-app.use(cors());
+app.use(cors(corsOptions));
 
 app.get("/", (req, res) => {
   res.send("HOLA MUNDO API");
